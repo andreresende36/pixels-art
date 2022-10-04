@@ -37,26 +37,14 @@ botao.addEventListener("click", function () {
   for (let i = 0; i < 4; i++) {
     arrayRecover[i] = coresDaPaleta[i].style.backgroundColor;
   }
-  localStorage.setItem('paleta', JSON.stringify(arrayRecover));
+  localStorage.setItem('colorPalette', JSON.stringify(arrayRecover));
 })
 
 // Recupera cores
 function recuperaCores() {
-  let paletaSalva = JSON.parse(localStorage.getItem('paleta'));
+  let paletaSalva = JSON.parse(localStorage.getItem('colorPalette'));
   for (let i = 0; i < 4; i++) {
     coresDaPaleta[i].style.backgroundColor = paletaSalva[i];
   }
 }
-
 recuperaCores();
-// let coresRecover = [];
-// for (let i=0; i < coresDaPaleta.length; i++){
-//   coresRecover[i] = coresDaPaleta[i].style.backgroundColor;
-// }
-// localStorage.setItem('paleta-de-cores',JSON.stringify(coresRecover));
-
-// botao.addEventListener("click",function(){
-//   let recovery = JSON.parse(localStorage.getItem('paleta-de-cores'));
-//     coresDaPaleta = recovery;
-//   }
-// );
