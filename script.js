@@ -59,3 +59,19 @@ if (localStorage.getItem('colorPalette') === null) {
 else {
   recuperaCores();
 }
+
+// Cria quadro de pixels
+let pixelBoard = document.getElementById('pixel-board');
+function criaQuadroDePixels (linha, coluna){
+  let pixel;
+  for (let i = 1; i <= linha; i++){
+    for (let i = 1; i <= coluna; i++){
+      pixel = document.createElement('div');
+      pixel.className = 'pixel';
+      pixelBoard.appendChild(pixel);
+   }
+   let br = document.createElement('br');
+   pixelBoard.appendChild(br);
+  }
+}
+criaQuadroDePixels(5,5);

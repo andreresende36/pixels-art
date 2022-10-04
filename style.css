@@ -12,3 +12,21 @@
   display: inline-block;
   margin-left: 8px;
 }
+
+#pixel-board{
+  /* border: 1px solid black; */
+  width: auto;
+  text-align: center;
+  line-height: 0;
+}
+
+.pixel{
+  border: 1px solid black;
+  padding: 50px;
+  display: inline-block;
+  background-color: white;
+}
+
+#button-random-color{
+  margin: 7px 0 10px 0;
+}
