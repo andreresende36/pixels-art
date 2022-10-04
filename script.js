@@ -75,3 +75,8 @@ function criaQuadroDePixels (linha, coluna){
   }
 }
 criaQuadroDePixels(5,5);
+
+function setBlack(){
+  coresDaPaleta[0].className += ' selected';
+}
+window.onload = setBlack();
