@@ -25,6 +25,8 @@
   padding: 50px;
   display: inline-block;
   background-color: white;
+  width: 40px;
+  height: 40px;
 }
 
 #button-random-color{
