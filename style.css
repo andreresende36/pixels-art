@@ -1,0 +1,13 @@
+#title{
+  text-align: center;
+}
+
+#color-palette{
+  text-align: center;
+}
+
+.color{
+  border: 1px solid black;
+  padding: 50px;
+  display: inline-block;
+}
