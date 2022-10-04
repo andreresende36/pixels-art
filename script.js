@@ -18,7 +18,7 @@ function corAleatoria(){
   return corAleatoria;
 }
 
-// Função que seleciona aleatoriamente as cores dos últimos 3 boxes
+// // Função que seleciona aleatoriamente as cores dos últimos 3 boxes
 function selecionaCoresDaPaleta(){
   for (let i = 1; i < coresDaPaleta.length; i++) {
     coresDaPaleta[i].style.backgroundColor = corAleatoria();
@@ -28,5 +28,8 @@ function selecionaCoresDaPaleta(){
     }
   }
 }
-
 selecionaCoresDaPaleta();
+
+// Botão de cores aleatórias
+let botao = document.getElementById('button-random-color');
+botao.addEventListener("click",selecionaCoresDaPaleta);
