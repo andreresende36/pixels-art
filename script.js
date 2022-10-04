@@ -18,6 +18,15 @@ function corAleatoria() {
   return corAleatoria;
 }
 
+// Salva cores em localStorage
+let arrayRecover = [];
+function salvaCores() {
+  for (let i = 0; i < 4; i++) {
+    arrayRecover[i] = coresDaPaleta[i].style.backgroundColor;
+  }
+  localStorage.setItem('colorPalette', JSON.stringify(arrayRecover));
+}
+
 // Função que seleciona aleatoriamente as cores dos últimos 3 boxes
 function selecionaCoresDaPaleta() {
   for (let i = 1; i < coresDaPaleta.length; i++) {
@@ -27,18 +36,13 @@ function selecionaCoresDaPaleta() {
       coresDaPaleta[i].style.backgroundColor = corAleatoria();
     }
   }
+  salvaCores();
 }
 
 // Botão de cores aleatórias
 let botao = document.getElementById('button-random-color');
 botao.addEventListener("click", selecionaCoresDaPaleta);
-let arrayRecover = [];
-botao.addEventListener("click", function () {
-  for (let i = 0; i < 4; i++) {
-    arrayRecover[i] = coresDaPaleta[i].style.backgroundColor;
-  }
-  localStorage.setItem('colorPalette', JSON.stringify(arrayRecover));
-})
+botao.addEventListener("click",salvaCores);
 
 // Recupera cores
 function recuperaCores() {
@@ -47,4 +51,11 @@ function recuperaCores() {
     coresDaPaleta[i].style.backgroundColor = paletaSalva[i];
   }
 }
-recuperaCores();
+
+// Se tiver algo no localStorage ele carrega, se não, seleciona cores automaticamente
+if (localStorage.getItem('colorPalette') === null) {
+  selecionaCoresDaPaleta();
+}
+else {
+  recuperaCores();
+}
