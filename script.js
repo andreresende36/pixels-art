@@ -5,31 +5,58 @@ let coresDaPaleta = document.getElementsByClassName('color');
 coresDaPaleta[0].style.backgroundColor = 'black';
 
 // Função que retorna uma cor aleatória com exceção da cor branca #FFFFFF
-function corAleatoria(){
+function corAleatoria() {
   const hex = '0123456789ABCDEF';
   let corAleatoria = '#';
 
-  for (let i = 0; i < 6; i++){
+  for (let i = 0; i < 6; i++) {
     corAleatoria += hex[Math.floor(Math.random() * 16)];
   }
-  while (corAleatoria === '#FFFFFF'){
+  while (corAleatoria === '#FFFFFF') {
     corAleatoria();
   }
   return corAleatoria;
 }
 
-// // Função que seleciona aleatoriamente as cores dos últimos 3 boxes
-function selecionaCoresDaPaleta(){
+// Função que seleciona aleatoriamente as cores dos últimos 3 boxes
+function selecionaCoresDaPaleta() {
   for (let i = 1; i < coresDaPaleta.length; i++) {
     coresDaPaleta[i].style.backgroundColor = corAleatoria();
 
-    while (coresDaPaleta[i] === coresDaPaleta[i-1]){
+    while (coresDaPaleta[i] === coresDaPaleta[i - 1]) {
       coresDaPaleta[i].style.backgroundColor = corAleatoria();
     }
   }
 }
-selecionaCoresDaPaleta();
 
 // Botão de cores aleatórias
 let botao = document.getElementById('button-random-color');
-botao.addEventListener("click",selecionaCoresDaPaleta);
+botao.addEventListener("click", selecionaCoresDaPaleta);
+let arrayRecover = [];
+botao.addEventListener("click", function () {
+  for (let i = 0; i < 4; i++) {
+    arrayRecover[i] = coresDaPaleta[i].style.backgroundColor;
+  }
+  localStorage.setItem('paleta', JSON.stringify(arrayRecover));
+})
+
+// Recupera cores
+function recuperaCores() {
+  let paletaSalva = JSON.parse(localStorage.getItem('paleta'));
+  for (let i = 0; i < 4; i++) {
+    coresDaPaleta[i].style.backgroundColor = paletaSalva[i];
+  }
+}
+
+recuperaCores();
+// let coresRecover = [];
+// for (let i=0; i < coresDaPaleta.length; i++){
+//   coresRecover[i] = coresDaPaleta[i].style.backgroundColor;
+// }
+// localStorage.setItem('paleta-de-cores',JSON.stringify(coresRecover));
+
+// botao.addEventListener("click",function(){
+//   let recovery = JSON.parse(localStorage.getItem('paleta-de-cores'));
+//     coresDaPaleta = recovery;
+//   }
+// );
