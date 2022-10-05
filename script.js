@@ -72,13 +72,13 @@ function criaQuadroDePixels(linha, coluna) {
     let br = document.createElement('br');
     pixelBoard.appendChild(br);
   }
+  localStorage.setItem('boardSize', JSON.stringify(linha));
 }
 
 // Definir a cor preta como cor inicial da paleta de cores
 function setBlack() {
   coresDaPaleta[0].className += ' selected';
 }
-window.onload = setBlack();
 
 // Função para selecionar uma cor na paleta de cores e preencher os pixels no quadro
 function selecionaCor() {
@@ -142,12 +142,20 @@ function recuperaPixels() {
   }
 }
 
-if (localStorage.getItem('pixelBoard') !== null) {
-  recuperaPixels();
-}
-else {
-  criaQuadroDePixels(5, 5);
-  preencheCor();
+let boardSize = JSON.parse(localStorage.getItem('boardSize'));
+function inicializar() {
+  setBlack();
+  if (localStorage.getItem('pixelBoard') !== null) {
+    recuperaPixels();
+  }
+  else if (boardSize !== null) {
+    criaQuadroDePixels(boardSize, boardSize);
+    preencheCor();
+  }
+  else {
+    criaQuadroDePixels(5, 5);
+    preencheCor();
+  }
 }
 
 // Criar um input que permita à pessoa usuária preencher um novo tamanho para o quadro de pixels
@@ -165,7 +173,7 @@ botaoVQV.addEventListener('click', function () {
   if (tamanho === '' || parseInt(tamanho) < 1) {
     alert('Board inválido!');
   }
-  else if (tamanho < 5){
+  else if (tamanho < 5) {
     tamanho = 5;
     apagarBoard();
     criaQuadroDePixels(tamanho, tamanho);
@@ -173,7 +181,7 @@ botaoVQV.addEventListener('click', function () {
     arrayPixels = [];
     preencheCor();
   }
-  else if (tamanho > 50){
+  else if (tamanho > 50) {
     tamanho = 50;
     apagarBoard();
     criaQuadroDePixels(tamanho, tamanho);
@@ -196,7 +204,7 @@ inputTamanho.addEventListener('keydown', function () {
     if (tamanho === '' || tamanho === '0') {
       alert('Board inválido!');
     }
-    else if (tamanho < 5){
+    else if (tamanho < 5) {
       tamanho = 5;
       apagarBoard();
       criaQuadroDePixels(tamanho, tamanho);
@@ -204,7 +212,7 @@ inputTamanho.addEventListener('keydown', function () {
       arrayPixels = [];
       preencheCor();
     }
-    else if (tamanho > 50){
+    else if (tamanho > 50) {
       tamanho = 50;
       apagarBoard();
       criaQuadroDePixels(tamanho, tamanho);
@@ -221,3 +229,5 @@ inputTamanho.addEventListener('keydown', function () {
     }
   }
 });
+
+window.onload = inicializar();
