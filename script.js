@@ -42,7 +42,7 @@ function selecionaCoresDaPaleta() {
 // Botão de cores aleatórias
 let botao = document.getElementById('button-random-color');
 botao.addEventListener("click", selecionaCoresDaPaleta);
-botao.addEventListener("click",salvaCores);
+botao.addEventListener("click", salvaCores);
 
 // Recupera cores
 function recuperaCores() {
@@ -62,21 +62,41 @@ else {
 
 // Cria quadro de pixels
 let pixelBoard = document.getElementById('pixel-board');
-function criaQuadroDePixels (linha, coluna){
+function criaQuadroDePixels(linha, coluna) {
   let pixel;
-  for (let i = 1; i <= linha; i++){
-    for (let i = 1; i <= coluna; i++){
+  for (let i = 1; i <= linha; i++) {
+    for (let i = 1; i <= coluna; i++) {
       pixel = document.createElement('div');
       pixel.className = 'pixel';
       pixelBoard.appendChild(pixel);
-   }
-   let br = document.createElement('br');
-   pixelBoard.appendChild(br);
+    }
+    let br = document.createElement('br');
+    pixelBoard.appendChild(br);
   }
 }
-criaQuadroDePixels(5,5);
+criaQuadroDePixels(5, 5);
 
-function setBlack(){
+// Definir a cor preta como cor inicial da paleta de cores
+function setBlack() {
   coresDaPaleta[0].className += ' selected';
 }
 window.onload = setBlack();
+
+// Função para selecionar uma cor na paleta de cores e preencher os pixels no quadro
+function selecionaCor() {
+  for (i = 0; i < coresDaPaleta.length; i++) {
+    coresDaPaleta[i].addEventListener('click', function () {
+      if (event.target.className === 'color') {
+        event.target.className += ' selected';
+      }
+      for (i = 0; i < coresDaPaleta.length; i++) {
+        if (coresDaPaleta[i] === event.target){
+        }
+        else {
+          coresDaPaleta[i].className = 'color';
+        }
+      }
+    })
+    }
+}
+selecionaCor();
