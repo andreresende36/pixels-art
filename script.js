@@ -63,7 +63,6 @@ else {
 // Cria quadro de pixels
 let pixelBoard = document.getElementById('pixel-board');
 function criaQuadroDePixels(linha, coluna) {
-  let pixel;
   for (let i = 1; i <= linha; i++) {
     for (let i = 1; i <= coluna; i++) {
       pixel = document.createElement('div');
@@ -90,13 +89,27 @@ function selecionaCor() {
         event.target.className += ' selected';
       }
       for (i = 0; i < coresDaPaleta.length; i++) {
-        if (coresDaPaleta[i] === event.target){
+        if (coresDaPaleta[i] === event.target) {
         }
         else {
           coresDaPaleta[i].className = 'color';
         }
       }
     })
-    }
+  }
 }
 selecionaCor();
+
+// Função que permite preencher um pixel do quadro com a cor selecionada na paleta de cores
+let pixels = document.getElementsByClassName('pixel');
+
+function preencheCor() {
+  for (i = 0; i < pixels.length; i++) {
+    pixels[i].addEventListener('click', function () {
+      let corSelecionada = document.getElementsByClassName('selected')[0].style.backgroundColor;
+      event.target.style.backgroundColor = corSelecionada;
+    }
+    )
+  }
+}
+preencheCor();
