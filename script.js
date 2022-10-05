@@ -165,6 +165,22 @@ botaoVQV.addEventListener('click', function () {
   if (tamanho === '' || parseInt(tamanho) < 1) {
     alert('Board inválido!');
   }
+  else if (tamanho < 5){
+    tamanho = 5;
+    apagarBoard();
+    criaQuadroDePixels(tamanho, tamanho);
+    localStorage.removeItem('pixelBoard');
+    arrayPixels = [];
+    preencheCor();
+  }
+  else if (tamanho > 50){
+    tamanho = 50;
+    apagarBoard();
+    criaQuadroDePixels(tamanho, tamanho);
+    localStorage.removeItem('pixelBoard');
+    arrayPixels = [];
+    preencheCor();
+  }
   else {
     apagarBoard();
     criaQuadroDePixels(tamanho, tamanho);
@@ -179,6 +195,22 @@ inputTamanho.addEventListener('keydown', function () {
   if (event.key === "Enter") {
     if (tamanho === '' || tamanho === '0') {
       alert('Board inválido!');
+    }
+    else if (tamanho < 5){
+      tamanho = 5;
+      apagarBoard();
+      criaQuadroDePixels(tamanho, tamanho);
+      localStorage.removeItem('pixelBoard');
+      arrayPixels = [];
+      preencheCor();
+    }
+    else if (tamanho > 50){
+      tamanho = 50;
+      apagarBoard();
+      criaQuadroDePixels(tamanho, tamanho);
+      localStorage.removeItem('pixelBoard');
+      arrayPixels = [];
+      preencheCor();
     }
     else {
       apagarBoard();
