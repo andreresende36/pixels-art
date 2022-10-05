@@ -73,7 +73,6 @@ function criaQuadroDePixels(linha, coluna) {
     pixelBoard.appendChild(br);
   }
 }
-criaQuadroDePixels(5, 5);
 
 // Definir a cor preta como cor inicial da paleta de cores
 function setBlack() {
@@ -104,7 +103,7 @@ selecionaCor();
 let pixels = document.getElementsByClassName('pixel');
 
 function preencheCor() {
-  for (i = 0; i < pixels.length; i++) {
+  for (let i = 0; i < pixels.length; i++) {
     pixels[i].addEventListener('click', function () {
       let corSelecionada = document.getElementsByClassName('selected')[0].style.backgroundColor;
       event.target.style.backgroundColor = corSelecionada;
@@ -113,7 +112,6 @@ function preencheCor() {
     )
   }
 }
-preencheCor();
 
 // Cria um botão que retorna a cor do quadro para a cor inicial
 let botaoLimpar = document.getElementById('clear-board');
@@ -137,11 +135,57 @@ function salvaPixels() {
 }
 function recuperaPixels() {
   let pixelsSalvos = JSON.parse(localStorage.getItem('pixelBoard'));
+  let tamanho = Math.sqrt(pixelsSalvos.length);
+  criaQuadroDePixels(tamanho, tamanho);
   for (let i = 0; i < pixels.length; i++) {
     pixels[i].style.backgroundColor = pixelsSalvos[i];
   }
 }
 
-if (localStorage.getItem('pixelBoard') !== null){
+if (localStorage.getItem('pixelBoard') !== null) {
   recuperaPixels();
 }
+else {
+  criaQuadroDePixels(5, 5);
+  preencheCor();
+}
+
+// Criar um input que permita à pessoa usuária preencher um novo tamanho para o quadro de pixels
+let botaoVQV = document.getElementById('generate-board');
+let inputTamanho = document.getElementById('board-size');
+
+function apagarBoard() {
+  while (pixelBoard.children.length > 0) {
+    // while (pixelBoard.firstChild) {  
+    pixelBoard.removeChild(pixelBoard.firstChild);
+  }
+}
+botaoVQV.addEventListener('click', function () {
+  let tamanho = document.getElementById('board-size').value;
+  if (tamanho === '' || parseInt(tamanho) < 1) {
+    alert('Board inválido!');
+  }
+  else {
+    apagarBoard();
+    criaQuadroDePixels(tamanho, tamanho);
+    localStorage.removeItem('pixelBoard');
+    arrayPixels = [];
+    preencheCor();
+  }
+})
+
+inputTamanho.addEventListener('keydown', function () {
+  let tamanho = document.getElementById('board-size').value;
+  if (event.key === "Enter") {
+    if (tamanho === '' || tamanho === '0') {
+      alert('Board inválido!');
+    }
+    else {
+      apagarBoard();
+      criaQuadroDePixels(tamanho, tamanho);
+      localStorage.removeItem('pixelBoard');
+      arrayPixels = [];
+      preencheCor();
+    }
+  }
+});
