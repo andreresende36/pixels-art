@@ -142,9 +142,6 @@ function recuperaPixels() {
   }
 }
 
-if (localStorage.getItem('pixelBoard') === null){
-  limpar()
-}
-else{
+if (localStorage.getItem('pixelBoard') !== null){
   recuperaPixels();
 }
