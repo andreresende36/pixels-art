@@ -19,12 +19,12 @@ function corAleatoria() {
 }
 
 // Salva cores em localStorage
-let arrayRecover = [];
+let arrayPaleta = [];
 function salvaCores() {
   for (let i = 0; i < 4; i++) {
-    arrayRecover[i] = coresDaPaleta[i].style.backgroundColor;
+    arrayPaleta[i] = coresDaPaleta[i].style.backgroundColor;
   }
-  localStorage.setItem('colorPalette', JSON.stringify(arrayRecover));
+  localStorage.setItem('colorPalette', JSON.stringify(arrayPaleta));
 }
 
 // Função que seleciona aleatoriamente as cores dos últimos 3 boxes
@@ -108,6 +108,7 @@ function preencheCor() {
     pixels[i].addEventListener('click', function () {
       let corSelecionada = document.getElementsByClassName('selected')[0].style.backgroundColor;
       event.target.style.backgroundColor = corSelecionada;
+      salvaPixels();
     }
     )
   }
@@ -120,7 +121,30 @@ function limpar() {
   botaoLimpar.addEventListener('click', function () {
     for (i = 0; i < pixels.length; i++) {
       pixels[i].style.backgroundColor = 'white';
+      salvaPixels();
     }
   })
 }
 limpar();
+
+// Criar uma função para salvar e recuperar o seu desenho atual no localStorage
+let arrayPixels = [];
+function salvaPixels() {
+  for (let i = 0; i < pixels.length; i++) {
+    arrayPixels[i] = pixels[i].style.backgroundColor;
+  }
+  localStorage.setItem('pixelBoard', JSON.stringify(arrayPixels));
+}
+function recuperaPixels() {
+  let pixelsSalvos = JSON.parse(localStorage.getItem('pixelBoard'));
+  for (let i = 0; i < pixels.length; i++) {
+    pixels[i].style.backgroundColor = pixelsSalvos[i];
+  }
+}
+
+if (localStorage.getItem('pixelBoard') === null){
+  limpar()
+}
+else{
+  recuperaPixels();
+}
