@@ -1,26 +1,30 @@
-#title{
+#title {
   text-align: center;
 }
 
-#color-palette{
+#color-palette {
   text-align: center;
 }
 
-.color{
+.color {
   border: 1px solid black;
   padding: 50px;
   display: inline-block;
   margin-left: 8px;
 }
 
-#pixel-board{
+.selected {
+  box-shadow: 0px 0px 15px gray;
+}
+
+#pixel-board {
   /* border: 1px solid black; */
   width: auto;
   text-align: center;
   line-height: 0;
 }
 
-.pixel{
+.pixel {
   border: 1px solid black;
   padding: 50px;
   display: inline-block;
@@ -29,6 +33,11 @@
   height: 40px;
 }
 
-#button-random-color{
+#botao-limpar{
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+#button-random-color {
   margin: 7px 0 10px 0;
 }

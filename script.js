@@ -113,3 +113,14 @@ function preencheCor() {
   }
 }
 preencheCor();
+
+// Cria um botão que retorna a cor do quadro para a cor inicial
+let botaoLimpar = document.getElementById('clear-board');
+function limpar() {
+  botaoLimpar.addEventListener('click', function () {
+    for (i = 0; i < pixels.length; i++) {
+      pixels[i].style.backgroundColor = 'white';
+    }
+  })
+}
+limpar();
